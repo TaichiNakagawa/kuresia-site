@@ -10,7 +10,7 @@ function App() {
       <BackgroundParticles />
 
       <header className="flex flex-col items-center justify-center text-center pt-20 pb-10 px-4 relative z-10">
-        <h1 className="text-5xl font-bold mb-4">運命の聖戦</h1>
+        <h1 className="text-5xl font-bold mb-4">クレシア伝説</h1>
         <p className="text-xl text-gray-300 mb-8">
           「その一歩が、世界を変える」王道ファンタジーRPG
         </p>
