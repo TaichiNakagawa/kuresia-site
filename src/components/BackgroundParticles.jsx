@@ -4,54 +4,47 @@ import { loadFull } from "tsparticles";
 
 export default function BackgroundParticles() {
   const particlesInit = useCallback(async (engine) => {
-    console.log("🌟 particlesInit called");
     await loadFull(engine);
-  }, []);
-
-  const particlesLoaded = useCallback((container) => {
-    console.log("🌟 particlesLoaded called");
-    if (container) {
-      console.log("particles count:", container.particles.count);
-    }
   }, []);
 
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "#000000",
-        zIndex: -1,
-      }}
       options={{
-        fullScreen: { enable: false }, // ここ重要: 独自でサイズ制御しているため fullScreen は false に
-        background: {
-          color: "#000000",
-        },
-        detectRetina: true,
+        fullScreen: { enable: true, zIndex: 0 },
         particles: {
-          number: {
-            value: 100,
-            density: { enable: false },
+          number: { value: 20 },
+          shape: {
+            type: "image",
+            image: {
+              src: "/leaf.png",
+              width: 32,
+              height: 32,
+            },
           },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 1 },
-          size: { value: 5 },
-          move: { enable: true, speed: 2 },
-          links: {
+          opacity: { value: 0.8 },
+          size: { value: { min: 15, max: 30 } },
+          move: {
             enable: true,
-            distance: 150,
-            color: "#ffffff",
-            opacity: 0.5,
-            width: 1,
+            speed: 1,
+            direction: "bottom",
+            straight: false,
+            outModes: {
+              default: "out",
+            },
           },
+          rotate: {
+            random: true,
+            animation: {
+              enable: true,
+              speed: 5,
+              sync: false,
+            },
+          },
+        },
+        background: {
+          color: "transparent", // 背景は透明
         },
       }}
     />

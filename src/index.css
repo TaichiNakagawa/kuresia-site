@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+@import 'aos/dist/aos.css';
+
+#tsparticles canvas {
+  background: transparent !important;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -17,7 +22,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #fdf6e3;
   text-decoration: inherit;
 }
 a:hover {
@@ -25,9 +30,10 @@ a:hover {
 }
 
 body {
+  font-family: 'Cinzel', serif;
+  background-color: #0f2f1e; /* 深い森の緑 */
+  color: #fdf6e3; /* 柔らかいクリーム色 */
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
