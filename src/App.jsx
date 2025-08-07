@@ -1,9 +1,12 @@
 import './index.css';
 import BackgroundParticles from './components/BackgroundParticles';
+import MagicWandCursor from './components/MagicWandCursor';
+import CharacterSection from "./components/CharacterSection";
 
 function App() {
   return (
     <div className="min-h-screen text-white">
+      <MagicWandCursor />
       <BackgroundParticles />
 
       {/* ヒーローセクション */}
@@ -65,6 +68,7 @@ function App() {
           </div>
         </div>
       </section>
+    <CharacterSection />
     </div>
   );
 }
