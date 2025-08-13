@@ -18,7 +18,7 @@ export default function BackgroundParticles() {
           shape: {
             type: "image",
             image: {
-              src: "/leaf.png",
+              src: "/wing.png",
               width: 32,
               height: 32,
             },

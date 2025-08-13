@@ -1,7 +1,8 @@
 import './index.css';
-import BackgroundParticles from './components/BackgroundParticles';
-import MagicWandCursor from './components/MagicWandCursor';
-import CharacterSection from "./components/CharacterSection";
+import BackgroundParticles from './components/function/BackgroundParticles';
+import MagicWandCursor from './components/function/MagicWandCursor';
+import CharacterSection from "./components/Section/CharacterSection";
+import ContactFormSection from "./components/Section/ContactFormSection";
 
 function App() {
   return (
@@ -68,7 +69,10 @@ function App() {
           </div>
         </div>
       </section>
+    {/* キャラクター紹介セクション */}
     <CharacterSection />
+    {/* コンタクトフォームセクション */}
+    <ContactFormSection/>
     </div>
   );
 }
