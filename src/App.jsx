@@ -21,12 +21,13 @@ function App() {
           alt="ゲームメインビジュアル"
           className="w-full max-w-3xl rounded-xl shadow-lg mb-8 border-4 border-green-300"
         />
-        <a
-          href="#"
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300"
-        >
-          今すぐプレイ
-        </a>
+       <p className="text-xl text-gray-300 mb-8">
+          対応プラットフォーム：Windows(ダウンロード版)<br />
+          　　　　　　　　　　　　　　PC、スマートフォン(ブラウザ版)
+        </p>
+       <p className="text-xl text-gray-300 mb-8">
+          公開日：未定
+        </p>
       </header>
 
       {/* ゲーム紹介セクション */}
