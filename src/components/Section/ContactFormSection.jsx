@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { db } from "../../../firebaseConfig";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function ContactFormSection() {
   const [formData, setFormData] = useState({
@@ -15,20 +17,19 @@ export default function ContactFormSection() {
     });
   };
 
-  const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // 簡易バリデーション
-    if (!formData.name || !formData.email || !formData.message) {
-      setStatus("全ての項目を入力してください。");
-      return;
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...formData,
+        createdAt: serverTimestamp()
+      });
+      setStatus("送信しました！ありがとうございます。");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("送信エラー:", error);
+      setStatus("送信に失敗しました。");
     }
-
-    // 本来はここで送信処理(APIやFirebase FunctionsにPOST)
-    console.log("送信データ:", formData);
-
-    setStatus("送信が完了しました！");
-    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -49,6 +50,7 @@ export default function ContactFormSection() {
               type="text"
               id="name"
               name="name"
+              placeholder="お名前"
               value={formData.name}
               onChange={handleChange}
               className="w-full p-3 rounded-lg text-black bg-white/90"
@@ -63,6 +65,7 @@ export default function ContactFormSection() {
               type="email"
               id="email"
               name="email"
+              placeholder="メールアドレス"
               value={formData.email}
               onChange={handleChange}
               className="w-full p-3 rounded-lg text-black bg-white/90"
@@ -77,6 +80,7 @@ export default function ContactFormSection() {
               id="message"
               name="message"
               rows="4"
+              placeholder="お問い合わせ内容"
               value={formData.message}
               onChange={handleChange}
               className="w-full p-3 rounded-lg text-black bg-white/90"
