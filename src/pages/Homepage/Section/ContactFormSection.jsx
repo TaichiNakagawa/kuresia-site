@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { db } from "../../../firebaseConfig";
+import { db } from "../../../../firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-export default function ContactFormSection() {
+export default function ContactFormSection({ id }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,11 +33,11 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section className="py-16 px-6 bg-green-950 bg-opacity-80">
+    <section id={id} className="py-16 px-6 bg-green-950 bg-opacity-80">
       <div className="relative max-w-3xl mx-auto z-10">
-        <h2 className="text-3xl font-bold mb-6 text-center border-b border-green-400 inline-block pb-2">
-          お問い合わせ
-        </h2>
+      <h2 className="text-3xl font-bold mb-6 border-b border-green-400 inline-block mx-auto pb-2">
+        お問い合わせ
+      </h2>
         <form
           onSubmit={handleSubmit}
           className="space-y-6 bg-green-800 bg-opacity-60 p-8 rounded-xl shadow-lg"
