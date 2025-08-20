@@ -1,4 +1,3 @@
-import SideNav from "../../components/SideNav";
 import CharacterSection from "./Section/CharacterSection";
 import ContactFormSection from "./Section/ContactFormSection";
 
@@ -26,8 +25,8 @@ export default function HomePage() {
       </section>
 
       {/* ゲーム紹介セクション */}
-      <section id="game-intro" className="py-16 px-6 relative">
-        <div className="max-w-4xl mx-auto text-center bg-green-950 bg-opacity-80 p-8 rounded-xl z-5">
+      <section id="game-intro" className="py-16 px-6 relative z-10">
+        <div className="flex flex-col max-w-4xl mx-auto items-center justify-center text-center pt-20 pb-10 px-4 relative z-10">
           <h2 className="text-3xl font-bold mb-6 border-b border-green-400 inline-block pb-2">
             ゲーム紹介
           </h2>

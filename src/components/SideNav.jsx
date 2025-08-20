@@ -55,7 +55,7 @@ export default function SideNav() {
       {/* ハンバーガーメニュー（スマホのみ） */}
       {!open && (
         <button
-          className="md:hidden fixed top-4 left-4 z-[1000] p-2 bg-purple-700 text-white rounded-lg"
+          className="md:hidden fixed top-4 left-4 z-[100] p-2 bg-purple-700 text-white rounded-lg"
           onClick={() => setOpen(true)}
         >
           <Menu size={24} />
@@ -65,7 +65,7 @@ export default function SideNav() {
       {/* オーバーレイ（スマホ時のみ & サイドバー開いた時だけ） */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/30 z-[1050] md:hidden"
+          className="fixed inset-0 bg-black/30 z-[90] md:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -73,9 +73,12 @@ export default function SideNav() {
       {/* サイドバー */}
       <nav
         className={`
-          fixed top-0 left-0 h-full w-48 
-          bg-gradient-to-b from-purple-700 via-indigo-700 to-blue-700 bg-opacity-80
-          backdrop-blur-md shadow-lg z-[1100] flex flex-col items-start py-10 px-4
+          fixed z-110 top-0 left-0 h-full w-56
+          bg-gradient-to-b from-[#2a1a0f] via-[#3a2415] to-[#1c0d07] 
+          border-r-4 border-yellow-800
+          shadow-[inset_0_0_20px_rgba(255,215,0,0.3),0_0_15px_rgba(0,0,0,0.7)]
+          flex flex-col items-start py-10 px-6
+          text-yellow-200 font-serif
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
           md:translate-x-0

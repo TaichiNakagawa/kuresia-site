@@ -21,7 +21,7 @@ export default function CharacterSection() {
   ];
 
   return (
-    <section style={{ padding: "50px 20px", background: "rgba(0,0,0,0.6)" }}>
+    <section style={{ padding: "50px 20px"}} className="bg-black">
      <div className="text-center mb-6 ">
       <h2 className="text-3xl font-bold mb-6 border-b border-green-400 inline-block pb-2 z-10">
         キャラクター紹介
