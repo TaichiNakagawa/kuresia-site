@@ -1,31 +1,36 @@
 import CharacterSection from "./Section/CharacterSection";
 import ContactFormSection from "./Section/ContactFormSection";
+import MagicAppear from "../../components/function/MagicAppear";
 
 export default function HomePage() {
   return (
       <div className="flex flex-col space-y-16">
       {/* ヒーローセクション */}
-      <section id="home" className="flex flex-col items-center justify-center text-center pt-20 pb-10 px-4 relative z-10">
-        <h1 className="text-5xl font-bold mb-4">クレシア伝説</h1>
-        <p className="text-xl text-gray-300 mb-8">
-          「その一歩が、世界を変える」王道ファンタジーRPG
-        </p>
-        <img
-          src="/main-visual.png"
-          alt="ゲームメインビジュアル"
-          className="w-full max-w-3xl rounded-xl shadow-lg mb-8 border-4 border-green-300"
-        />
-        <p className="text-xl text-gray-300 mb-8">
-          対応プラットフォーム：Windows(ダウンロード版)<br />
-          　　　　　　　　　　　　　　PC、スマートフォン(ブラウザ版)
-        </p>
-        <p className="text-xl text-gray-300 mb-8">
-          公開日：未定
-        </p>
-      </section>
+       <MagicAppear>
+        <section id="home" className="flex flex-col items-center justify-center text-center pt-20 pb-10 px-4 relative z-10">
+          <h1 className="text-5xl font-bold mb-4">クレシア伝説</h1>
+          <p className="text-xl text-gray-300 mb-8">
+            「その一歩が、世界を変える」王道ファンタジーRPG
+          </p>
+          <img
+            src="/main-visual.png"
+            alt="ゲームメインビジュアル"
+            className="w-full max-w-3xl rounded-xl shadow-lg mb-8 border-4 border-green-300"
+          />
+          <p className="text-xl text-gray-300 mb-8">
+            対応プラットフォーム：Windows(ダウンロード版)<br />
+            　　　　　　　　　　　　　　PC、スマートフォン(ブラウザ版)
+          </p>
+          <p className="text-xl text-gray-300 mb-8">
+            公開日：未定
+          </p>
+        </section>
+       </MagicAppear>
+      
 
       {/* ゲーム紹介セクション */}
-      <section id="game-intro" className="py-16 px-6 relative z-10">
+      <MagicAppear>
+       <section id="game-intro" className="py-16 px-6 relative z-10">
         <div className="flex flex-col max-w-4xl mx-auto items-center justify-center text-center pt-20 pb-10 px-4 relative z-10">
           <h2 className="text-3xl font-bold mb-6 border-b border-green-400 inline-block pb-2">
             ゲーム紹介
@@ -64,16 +69,23 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+    </MagicAppear>
+     
 
       {/* キャラクター紹介セクション */}
-      <section id="character">
-        <CharacterSection />
-      </section>
+      <MagicAppear>
+        <section id="character">
+          <CharacterSection />
+        </section>
+      </MagicAppear>
+      
       
       {/* お問い合わせセクション */}
-      <section id="contact">
-        <ContactFormSection />
-      </section>
+      <MagicAppear>
+        <section id="contact">
+          <ContactFormSection />
+        </section>
+      </MagicAppear>
     </div>
   );
 }

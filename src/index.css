@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import 'aos/dist/aos.css';
 
+
+@layer utilities {
+  .animate-spin-slow { animation: spin 12s linear infinite; }
+  .animate-spin-slower { animation: spin 20s linear infinite; }
+}
+
 #tsparticles canvas {
   background: transparent !important;
 }
