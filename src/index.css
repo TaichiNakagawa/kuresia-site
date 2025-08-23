@@ -1,10 +1,24 @@
 @import 'tailwindcss';
 @import 'aos/dist/aos.css';
 
-
 @layer utilities {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 2s ease-out forwards;
+  }
   .animate-spin-slow { animation: spin 12s linear infinite; }
   .animate-spin-slower { animation: spin 20s linear infinite; }
+
 }
 
 #tsparticles canvas {

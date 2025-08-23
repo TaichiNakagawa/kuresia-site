@@ -29,11 +29,17 @@ export default function SideNav() {
   const handleNavClick = (item) => {
     if (item.isSection) {
       if (location.pathname === "/") {
+        // すでにトップページにいる → ただのスクロール
         handleScroll(item.sectionId);
       } else {
-        // トップページに遷移してからスクロール
-        navigate(`/#${item.sectionId}`);
-        setTimeout(() => handleScroll(item.sectionId), 100); // 遷移後に少し待ってスクロール
+        // Home ボタンだけは Overlay を発火させたい
+        if (item.name === "Home") {
+          navigate("/", { state: { fromHomeButton: true } });
+        } else {
+          // 他のセクションはオーバーレイ不要
+          navigate(`/#${item.sectionId}`, { state: { fromHomeButton: false } });
+          setTimeout(() => handleScroll(item.sectionId), 100);
+        }
       }
     } else {
       navigate(item.path);

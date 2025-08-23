@@ -39,7 +39,7 @@ export default function MagicWandController() {
           onClick={() => setWandEnabled((v) => !v)}
           aria-pressed={wandEnabled}
           className={`
-            fixed top-4 right-4 z-[10001] 
+            fixed top-4 right-4 z-[9998] 
             rounded-full px-5 py-3 
             bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500
             text-white font-bold
