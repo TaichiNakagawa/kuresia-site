@@ -10,7 +10,7 @@ import SubtitlesOverlay from "./components/function/SubtitlesOverlay";
 function Layout() {
   const location = useLocation();
   const showOverlay =
-    location.pathname === "/" && location.state?.fromHomeButton;
+    location.pathname === "/" &&  (location.state?.fromHomeButton || location.hash === "" || location.hash === "#home");
 
   return (
     <div className="flex">
