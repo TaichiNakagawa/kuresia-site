@@ -1,5 +1,5 @@
-// src/components/MagicWandCursor.jsx
-import { useState, useEffect } from "react";
+// src/components/function/MagicWandCursor.jsx
+import { useState, useEffect, useRef } from "react";
 
 function randomRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -7,90 +7,107 @@ function randomRange(min, max) {
 
 export default function MagicWandCursor({ enabled = true }) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [sparks, setSparks] = useState([]);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const canvasRef = useRef(null);
+  const particlesRef = useRef([]);
 
-  // 端末判定
+  // タッチ端末判定
   useEffect(() => {
-    const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    setIsTouchDevice(hasTouch);
+    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
 
-  // 位置追従（有効時のみ）
+  // マウス追従
   useEffect(() => {
     if (!enabled) return;
-
     const handleMove = (e) => {
       const x = e.touches ? e.touches[0].clientX : e.clientX;
       const y = e.touches ? e.touches[0].clientY : e.clientY;
       setPos({ x, y });
     };
-
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("touchmove", handleMove);
-
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("touchmove", handleMove);
     };
   }, [enabled]);
 
-  // クリック/タッチで魔法（有効時のみ）
+  // タップで粒子発生
   useEffect(() => {
     if (!enabled) return;
 
-    const handleClickOrTouch = (e) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const handleClick = (e) => {
       const x = e.touches ? e.touches[0].clientX : e.clientX;
       const y = e.touches ? e.touches[0].clientY : e.clientY;
 
-      const id = Date.now();
-      const newSparks = Array.from({ length: 10 }).map((_, i) => ({
-        id: id + "-" + i,
-        x: x + 30,
-        y: y - 10,
-        angle: randomRange(-90, 90),
+      const newParticles = Array.from({ length: 12 }).map(() => ({
+        x,
+        y,
+        angle: randomRange(0, Math.PI * 2),
         speed: randomRange(2, 6),
-        size: randomRange(6, 12),
-        color: ["#FFD700", "#FFFFFF", "#FF69B4"][Math.floor(Math.random() * 3)],
+        size: randomRange(2, 5),
+        color: ["#00FFFF", "#66CCFF", "#99FFFF", "#FFFFFF"][Math.floor(Math.random() * 4)],
+        createdAt: Date.now(),
+        lifetime: 400,
       }));
 
-      setSparks((prev) => [...prev, ...newSparks]);
-
-      setTimeout(() => {
-        setSparks((prev) =>
-          prev.filter((spark) => !newSparks.some((ns) => ns.id === spark.id))
-        );
-      }, 1200);
+      particlesRef.current.push(...newParticles);
     };
 
-    window.addEventListener("click", handleClickOrTouch);
-    window.addEventListener("touchstart", handleClickOrTouch);
+    window.addEventListener("click", handleClick);
+    window.addEventListener("touchstart", handleClick);
+
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const now = Date.now();
+
+      particlesRef.current = particlesRef.current.filter(p => now - p.createdAt < p.lifetime);
+
+      particlesRef.current.forEach(p => {
+        const t = (now - p.createdAt) / p.lifetime;
+        const px = p.x + Math.cos(p.angle) * p.speed * t * 10;
+        const py = p.y + Math.sin(p.angle) * p.speed * t * 10;
+
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(render);
+    };
+    render();
 
     return () => {
-      window.removeEventListener("click", handleClickOrTouch);
-      window.removeEventListener("touchstart", handleClickOrTouch);
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("touchstart", handleClick);
+      window.removeEventListener("resize", resizeCanvas);
     };
-  }, [enabled]);
-
-  // 無効化した瞬間に残ってる火花を消す
-  useEffect(() => {
-    if (!enabled) setSparks([]);
   }, [enabled]);
 
   return (
     <>
-      {/* PCで有効時だけカーソルを隠す */}
-      {enabled && !isTouchDevice && <style>{`* { cursor: none !important; }`}</style>}
-
-      {/* 杖：PCで有効時のみ表示（スマホは出さない） */}
-      {enabled && !isTouchDevice && (
+      {!isTouchDevice && enabled && <style>{`* { cursor: none !important; }`}</style>}
+      {!isTouchDevice && enabled && (
         <img
           src="/wand.png"
           alt="Magic Wand"
           style={{
             position: "fixed",
             left: pos.x,
-            top: pos.y,
+            top: pos.y + 40, // 杖先端に合わせる
             pointerEvents: "none",
             transform: "translate(-50%, -50%) rotate(-45deg)",
             width: "80px",
@@ -98,41 +115,18 @@ export default function MagicWandCursor({ enabled = true }) {
           }}
         />
       )}
-
-      {/* キラキラ粒：有効時のみ */}
-      {enabled &&
-        sparks.map(({ id, x, y, size, color }) => (
-          <div
-            key={id}
-            style={{
-              position: "fixed",
-              left: x,
-              top: y,
-              width: size,
-              height: size,
-              background: color,
-              borderRadius: "50%",
-              pointerEvents: "none",
-              zIndex: 10000,
-              transform: `translate(0, 0)`,
-              animation: `sparkFly 1.2s forwards`,
-              animationTimingFunction: "ease-out",
-            }}
-          />
-        ))}
-
-      <style>{`
-        @keyframes sparkFly {
-          0% {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-          }
-          100% {
-            opacity: 0;
-            transform: translate(50px, -50px) scale(0.3);
-          }
-        }
-      `}</style>
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "fixed",
+          top: -20,
+          left: 10,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: 10000
+        }}
+      />
     </>
   );
 }

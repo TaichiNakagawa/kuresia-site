@@ -88,6 +88,12 @@ button:focus-visible {
   width: 100%;
 }
 
+@media (max-width: 480px) {
+ h1 {
+  font-size: 2.5em;
+} 
+}
+
 /*
 @media (prefers-color-scheme: light) {
   :root {
