@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import SideNav from "./components/SideNav";
 import HomePage from "./pages/Homepage/HomePage";
-import CharactersPage from "./pages/CharactersPage";
+import MusicGallery from "./pages/MusicGallery";
 import AbilitiesPage from "./pages/AbilitiesPage";
 import BackgroundParticles from './components/function/BackgroundParticles';
 import MagicWandController from "./components/function/MagicWandController";
@@ -19,12 +19,12 @@ function Layout() {
         <BackgroundParticles />
         <MagicWandController />
 
-        {/* Home ボタンから来たときだけ表示 */}
+        {/*最初にアクセスもしくは Home ボタンから来たときだけ表示 */}
         {showOverlay && <SubtitlesOverlay />}
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/characters" element={<CharactersPage />} />
+          <Route path="/MusicGallery" element={<MusicGallery />} />
           <Route path="/abilities" element={<AbilitiesPage />} />
         </Routes>
       </main>

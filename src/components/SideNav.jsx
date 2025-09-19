@@ -12,7 +12,7 @@ export default function SideNav() {
     { name: "ゲーム紹介", path: "/", isSection: true, sectionId: "game-intro" },
     { name: "キャラクター紹介", path: "/", isSection: true, sectionId: "character" },
     { name: "お問い合わせ", path: "/", isSection: true, sectionId: "contact" },
-    { name: "Characters Page", path: "/characters", isSection: false },
+    { name: "音楽ギャラリー", path: "/MusicGallery", isSection: false },
     { name: "Abilities Page", path: "/abilities", isSection: false },
   ];
 
