@@ -2,8 +2,10 @@
 import { useState, useRef } from "react";
 
 export default function MusicGallery() {
-  const [currentTrack, setCurrentTrack] = useState(null);
   const audioRef = useRef(null);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5); // 初期音量 50%
 
   const tracks = [
     {
@@ -22,83 +24,89 @@ export default function MusicGallery() {
     },
     {
       id: 3,
-      title: "南の海",
-      description: "南国感のある、冒険の途中で訪れる南の海の曲。",
-      src: "/music/ship.ogg",
-      image: "/music/ship.png",
+      title: "南の洞窟",
+      description: "不思議な雰囲気の、冒険の途中で訪れる南の洞窟の曲。",
+      src: "/music/cave.mp3",
+      image: "/music/cave.png",
     },
     {
       id: 4,
-      title: "草原",
-      description: "冒険の途中で訪れる、草原の曲。",
-      src: "/music/weed.ogg",
-      image: "/music/weed.png",
+      title: "南の島",
+      description: "冒険の途中で訪れる、南の島の曲。",
+      src: "/music/iland.mp3",
+      image: "/music/iland.png",
     },
   ];
 
   const handlePlay = (track) => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    const audio = new Audio(track.src);
-    audioRef.current = audio;
-    audio.play();
-    setCurrentTrack(track.id);
-
-    audio.onended = () => {
-      setCurrentTrack(null);
+      if (currentTrack?.id === track.id && isPlaying) {
+        // 再生中の曲をクリックしたら停止
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        // 新しい曲をセットして再生
+        if (audioRef.current) {
+          audioRef.current.src = track.src;
+          audioRef.current.volume = volume;
+          audioRef.current.play();
+        }
+        setCurrentTrack(track);
+        setIsPlaying(true);
+      }
     };
-  };
 
-  const handleStop = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    setCurrentTrack(null);
-  };
+    const handleVolumeChange = (e) => {
+      const newVolume = parseFloat(e.target.value);
+      setVolume(newVolume);
+      if (audioRef.current) {
+        audioRef.current.volume = newVolume;
+      }
+    };
 
   return (
-    <section className="py-16 px-6 text-white">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold border-b border-green-400 inline-block pb-2">
-          🎵 音楽ギャラリー
-        </h2>
+    <div className="p-6 max-w-2xl mx-auto space-y-6 mt-5 relative z-10">
+      <h2 className="text-4xl font-bold mb-6">音楽ギャラリー</h2>
+      {/* 音量調整 */}
+      <div className="flex items-center space-x-3 mt-6 hidden md:flex">
+        <span className="text-sm">音量</span>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={handleVolumeChange}
+          className="w-40"
+        />
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {tracks.map((track) => (
-          <div
-            key={track.id}
-            className="bg-black/50 rounded-lg p-6 shadow-lg backdrop-blur-sm"
-          >
-            <h3 className="text-xl font-semibold mb-2">{track.title}</h3>
-            <img
+      {tracks.map((track) => (
+        <div
+          key={track.id}
+          className="p-4 rounded-2xl flex gap-4 items-center"
+        >
+          {/* ジャケット画像 */}
+          <img
             src={track.image}
             alt={track.title}
-            className="w-full object-contain rounded-md mb-4"
+            className="w-24 h-24 object-cover rounded-lg shadow"
           />
-            <p className="text-sm mb-4">{track.description}</p>
-            <div className="flex gap-3">
-              {currentTrack === track.id ? (
-                <button
-                  onClick={handleStop}
-                  className="px-4 py-2 bg-red-500 rounded-lg hover:bg-red-600"
-                >
-                  停止
-                </button>
-              ) : (
-                <button
-                  onClick={() => handlePlay(track)}
-                  className="px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600"
-                >
-                  再生
-                </button>
-              )}
-            </div>
+
+          {/* 曲情報 */}
+          <div className="flex-1">
+            <h2 className="text-lg font-semibold">{track.title}</h2>
+            <p className="text-sm mb-2">{track.description}</p>
+
+            <button
+              onClick={() => handlePlay(track)}
+              className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
+            >
+              {currentTrack?.id === track.id && isPlaying ? "⏸ 停止" : "▶ 再生"}
+            </button>
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      ))}
+      {/* 共通 audio */}
+      <audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
+    </div>
   );
 }
