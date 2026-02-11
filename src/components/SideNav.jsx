@@ -13,7 +13,7 @@ export default function SideNav() {
     { name: "キャラクター紹介", path: "/", isSection: true, sectionId: "character" },
     { name: "お問い合わせ", path: "/", isSection: true, sectionId: "contact" },
     { name: "音楽ギャラリー", path: "/MusicGallery", isSection: false },
-    { name: "Abilities Page", path: "/abilities", isSection: false },
+    { name: "プロローグ", path: "/prologue", isSection: false },
   ];
 
   const handleScroll = (id) => {

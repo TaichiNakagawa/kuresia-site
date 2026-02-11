@@ -107,7 +107,7 @@ export default function MagicWandCursor({ enabled = true }) {
           style={{
             position: "fixed",
             left: pos.x,
-            top: pos.y + 40, // 杖先端に合わせる
+            top: pos.y + 30, // 杖先端に合わせる
             pointerEvents: "none",
             transform: "translate(-50%, -50%) rotate(-45deg)",
             width: "80px",
