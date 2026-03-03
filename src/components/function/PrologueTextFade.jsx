@@ -24,9 +24,8 @@ export default function PrologueTextFade({ lines }) {
       {lines.map((line, i) => (
         <p
           key={i}
-          className={`text-2xl md:text-3xl transition-opacity duration-1000 ${
-            i < visibleCount ? "opacity-100" : "opacity-0"
-          }`}
+          className={`text-lg md:text-3xl transition-opacity duration-1000 ${i < visibleCount ? "opacity-100" : "opacity-0"
+            }`}
         >
           {line}
         </p>

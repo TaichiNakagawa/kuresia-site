@@ -139,7 +139,34 @@ button:focus-visible {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 2.5em;
+    font-size: 2.2em;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.6em !important;
+  }
+
+  .px-6 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .section-spacing {
+    margin-bottom: 3rem !important;
+  }
+
+  body::before {
+    display: none;
   }
 }
 
