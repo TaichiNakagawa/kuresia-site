@@ -9,11 +9,11 @@ export default function SideNav() {
 
   const navItems = [
     { name: "Home", path: "/", isSection: true, sectionId: "home" },
+    { name: "プロローグ", path: "/", isSection: true, sectionId: "prologue-preview" },
     { name: "ゲーム紹介", path: "/", isSection: true, sectionId: "game-intro" },
     { name: "キャラクター紹介", path: "/", isSection: true, sectionId: "character" },
+    { name: "音楽ギャラリー", path: "/", isSection: true, sectionId: "music" },
     { name: "お問い合わせ", path: "/", isSection: true, sectionId: "contact" },
-    { name: "音楽ギャラリー", path: "/MusicGallery", isSection: false },
-    { name: "プロローグ", path: "/prologue", isSection: false },
   ];
 
   const handleScroll = (id) => {
@@ -61,7 +61,7 @@ export default function SideNav() {
       {/* ハンバーガーメニュー（スマホのみ） */}
       {!open && (
         <button
-          className="md:hidden fixed top-4 left-4 z-[100] p-2 bg-purple-700 text-white rounded-lg"
+          className="md:hidden fixed top-4 left-4 z-[100] p-3 bg-[#3e2723] text-[#f4e4bc] rounded-xl border border-[#d2b48c]/30 shadow-xl"
           onClick={() => setOpen(true)}
         >
           <Menu size={24} />
@@ -71,7 +71,7 @@ export default function SideNav() {
       {/* オーバーレイ（スマホ時のみ & サイドバー開いた時だけ） */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/30 z-[90] md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -79,34 +79,53 @@ export default function SideNav() {
       {/* サイドバー */}
       <nav
         className={`
-          fixed z-110 top-0 left-0 h-full w-56
-          bg-gradient-to-b from-[#2a1a0f] via-[#3a2415] to-[#1c0d07] 
-          border-r-4 border-yellow-800
-          shadow-[inset_0_0_20px_rgba(255,215,0,0.3),0_0_15px_rgba(0,0,0,0.7)]
+          fixed z-110 top-0 left-0 h-full w-60
+          bg-gradient-to-b from-[#1b1109] via-[#2b1d10] to-[#1b1109]
+          border-r-4 border-[#3e2723]
+          shadow-[5px_0_30px_rgba(0,0,0,0.5)]
           flex flex-col items-start py-10 px-6
-          text-yellow-200 font-serif
+          text-[#f4e4bc] font-serif
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
           md:translate-x-0
         `}
       >
-        <div className="text-white font-extrabold text-2xl mb-10 tracking-wider">
-          クレシア伝説
+        {/* 装飾用の縦線 */}
+        <div className="absolute right-1 top-0 bottom-0 w-px bg-[#d2b48c]/10" />
+
+        <div className="w-full mb-12 flex flex-col items-center">
+          <span className="text-[#d2b48c] text-xs font-bold tracking-[0.3em] uppercase opacity-60 mb-1">Navigation</span>
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-[#d2b48c]/30 to-transparent" />
         </div>
-        <ul className="flex flex-col space-y-6 w-full">
+
+        <ul className="flex flex-col space-y-4 w-full">
           {navItems.map((item) => (
-            <li key={item.name} className="w-full relative">
+            <li key={item.name} className="w-full relative group">
               <button
                 onClick={() => handleNavClick(item)}
                 type="button"
-                className={linkClass}
+                className="button-reset relative flex items-center w-full py-3 px-2 text-lg font-bold text-[#d2b48c] hover:text-[#f4e4bc] transition-all duration-300 tracking-tight"
               >
-                <span className="absolute -left-3 w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
-                {item.name}
+                {/* ホバー時の装飾 */}
+                <span className="absolute left-0 w-1 h-0 bg-[#d2b48c] rounded-full opacity-0 group-hover:h-6 group-hover:opacity-100 transition-all duration-300"></span>
+                <span className="relative z-10 group-hover:translate-x-3 transition-transform duration-300">
+                  {item.name}
+                </span>
+
+                {/* ボタン背景のフェード */}
+                <div className="absolute inset-0 bg-[#d2b48c]/5 opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300" />
               </button>
             </li>
           ))}
         </ul>
+
+        {/* 下部の装飾 */}
+        <div className="mt-auto w-full pt-6">
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-[#d2b48c]/30 to-transparent mb-4" />
+          <p className="text-[10px] text-[#d2b48c]/40 text-center font-sans tracking-widest uppercase">
+            © Kuresia Project
+          </p>
+        </div>
       </nav>
     </>
   );

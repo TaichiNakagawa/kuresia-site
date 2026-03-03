@@ -14,32 +14,23 @@ export default function BackgroundParticles() {
       options={{
         fullScreen: { enable: true, zIndex: 0 },
         particles: {
-          number: { value: 20 },
-          shape: {
-            type: "image",
-            image: {
-              src: "/wing.png",
-              width: 32,
-              height: 32,
-            },
+          number: { value: 40 },
+          color: {
+            value: ["#a0522d", "#8b4513", "#3e2723", "#d2b48c"]
           },
-          opacity: { value: 0.8 },
-          size: { value: { min: 15, max: 30 } },
+          shape: {
+            type: "circle",
+          },
+          opacity: { value: 0.3 },
+          size: { value: { min: 2, max: 6 } },
           move: {
             enable: true,
-            speed: 1,
-            direction: "bottom",
+            speed: 0.8,
+            direction: "top",
+            random: true,
             straight: false,
             outModes: {
               default: "out",
-            },
-          },
-          rotate: {
-            random: true,
-            animation: {
-              enable: true,
-              speed: 5,
-              sync: false,
             },
           },
         },
