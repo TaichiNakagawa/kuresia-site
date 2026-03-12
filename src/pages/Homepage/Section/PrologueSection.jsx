@@ -3,17 +3,17 @@ import PrologueTextFade from "../../../components/function/PrologueTextFade";
 
 const scenes = [
     {
-        image: "/prologue1.png",
+        image: "/prologue_a.png",
         lines: ["クレシア誘拐事件から2年――", "ライナは、クレシアの守護騎士に任命され、訓練を続けていた。"],
         duration: 5000,
     },
     {
-        image: "/prologue2.png",
+        image: "/prologue_b.png",
         lines: ["そんなある日――", "今度は、クレシアの姉オリビアが誘拐されてしまう。"],
         duration: 5000,
     },
     {
-        image: "/prologue3.png",
+        image: "/prologue_c.png",
         lines: ["オリビアを救う為――", "ライナは、クレシアと共に冒険へと旅立つ。"],
         duration: 5000,
     },
