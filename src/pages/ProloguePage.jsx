@@ -3,17 +3,17 @@ import PrologueTextFade from "../components/function/PrologueTextFade";
 
 const scenes = [
   {
-    image: "/prologue1.png",
+    image: "/prologue_a.png",
     lines: ["クレシア誘拐事件から2年――", "ライナは、クレシアの守護騎士に任命され、訓練を続けていた。"],
     duration: 5000,
   },
   {
-    image: "/prologue2.png",
+    image: "/prologue_b.png",
     lines: ["そんなある日――", "今度は、クレシアの姉オリビアが誘拐されてしまう。"],
     duration: 5000,
   },
   {
-    image: "/prologue3.png",
+    image: "/prologue_c.png",
     lines: ["オリビアを救う為――", "ライナは、クレシア(と道中で知り合った仲間達)と共に冒険へと旅立つ。"],
     duration: 5000,
   },
@@ -55,14 +55,13 @@ export default function ProloguePage() {
   const scene = scenes[sceneIndex];
 
   return (
-     <div className="min-h-screen relative overflow-hidden text-white flex flex-col">
+    <div className="min-h-screen relative overflow-hidden text-white flex flex-col">
       {/* 背景 */}
       <img
         src={scene.image}
         alt=""
-        className={`absolute inset-0 w-full h-full object-cover object-center md:object-center transition-opacity duration-700 ${
-          isFading ? "opacity-0" : "opacity-100"
-        }`}
+        className={`absolute inset-0 w-full h-full object-cover object-center md:object-center transition-opacity duration-700 ${isFading ? "opacity-0" : "opacity-100"
+          }`}
       />
       <div className="absolute inset-0 bg-black/60" />
 
@@ -75,9 +74,8 @@ export default function ProloguePage() {
 
       {/* ===== 本文エリア ===== */}
       <main
-        className={`relative z-10 flex-1 flex items-center justify-center px-6 text-center transition-opacity duration-500 ${
-          isFading ? "opacity-0" : "opacity-100"
-        }`}
+        className={`relative z-10 flex-1 flex items-center justify-center px-6 text-center transition-opacity duration-500 ${isFading ? "opacity-0" : "opacity-100"
+          }`}
       >
         <div className="max-w-3xl">
           <PrologueTextFade key={sceneIndex} lines={scene.lines} />
@@ -85,12 +83,12 @@ export default function ProloguePage() {
       </main>
 
       {/* ===== シーン選択 ===== */}
-     <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-5 z-30">
-      {scenes.map((_, i) => (
-        <button
-          key={i}
-          onClick={() => jumpToScene(i)}
-          className={`
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-5 z-30">
+        {scenes.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => jumpToScene(i)}
+            className={`
             w-6 h-6
             aspect-square
             rounded-full
@@ -99,16 +97,16 @@ export default function ProloguePage() {
             transition-all duration-300
             flex items-center justify-center
             ${i === sceneIndex
-              ? "shadow-[0_0_14px_rgba(74,222,128,0.9)]"
-              : "opacity-70 hover:opacity-100"}
+                ? "shadow-[0_0_14px_rgba(74,222,128,0.9)]"
+                : "opacity-70 hover:opacity-100"}
           `}
-        >
-          {/* 中央核 */}
-          {i === sceneIndex && (
-            <span className="block w-2.5 h-2.5 rounded-full bg-green-400" />
-          )}
-        </button>
-       ))}
+          >
+            {/* 中央核 */}
+            {i === sceneIndex && (
+              <span className="block w-2.5 h-2.5 rounded-full bg-green-400" />
+            )}
+          </button>
+        ))}
       </div>
     </div>
   );
