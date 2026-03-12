@@ -81,7 +81,7 @@ export default function HomePage() {
             </h2>
 
             <p className="text-lg md:text-2xl text-[#d2b48c] mb-12 md:16 leading-relaxed md:leading-loose text-center max-w-3xl drop-shadow-sm px-2">
-              『クレシア伝説』は、広大な大陸と魔法世界を舞台にした<br className="hidden md:block" />
+              『クレシア伝説』は、前作<span className="text-[#f4e4bc] font-black italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] mx-1">『クレシアを助け出せ！』</span>の続編となる、広大な大陸と魔法世界を舞台にした<br className="hidden md:block" />
               <span className="text-[#f4e4bc] font-bold underline decoration-[#d2b48c] decoration-2 md:decoration-4">王道ファンタジーRPG</span>です。<br />
               個性豊かな仲間たちと共に、世界の謎と運命に挑みましょう。
             </p>
