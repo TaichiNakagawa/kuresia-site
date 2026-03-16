@@ -83,7 +83,7 @@ export default function CharacterSection() {
       name: "クレシア",
       enName: "KURESIA",
       images: ["/characters/kuresia1.png", "/characters/kuresia2.png", "/characters/kuresia3.png"],
-      description: "ヴァシリス王国の第２王女。魔法の才能がある。天真爛漫な性格だが、国と民を守るという強い使命感がある。オリビア姉様を救うため、ライナと共に城の外の世界へと飛び出す。",
+      description: "ヴァシリス王国の第２王女。魔法の才能がある。天真爛漫な性格だが、国と民を守るという強い使命感を持つ。オリビア姉様を救うため、ライナと共に城の外の世界へと旅立つ。",
       profile: {
         birthday: "4月12日",
         height: "158cm",
