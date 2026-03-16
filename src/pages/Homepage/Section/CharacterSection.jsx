@@ -83,7 +83,7 @@ export default function CharacterSection() {
       name: "クレシア",
       enName: "KURESIA",
       images: ["/characters/kuresia1.png", "/characters/kuresia2.png", "/characters/kuresia3.png"],
-      description: "ヴァシリス王国の第２王女。魔法の才能があり、パーティのメイジ。天真爛漫な性格だが、国と民を守るという強い使命感がある。オリビア姉様を救うため、ライナと共に城の外の世界へと飛び出す。",
+      description: "ヴァシリス王国の第２王女。魔法の才能がある。天真爛漫な性格だが、国と民を守るという強い使命感がある。オリビア姉様を救うため、ライナと共に城の外の世界へと飛び出す。",
       profile: {
         birthday: "4月12日",
         height: "158cm",
@@ -115,7 +115,7 @@ export default function CharacterSection() {
       name: "ベルギーニャ",
       enName: "BERUGINYA",
       images: ["/characters/beruginya1.png", "/characters/beruginya2.png", "/characters/beruginya3.png"],
-      description: "人里離れた島に住む魔族。膨大な知識と魔法能力を持つ。かつて人間との戦争で傷ついた過去を持つが、クレシアの純真な心に触れ、彼女たちの旅をサポートすることを決意。相手を煽るような言動を取るが、常に冷静。",
+      description: "人里離れた島に住む魔族。膨大な知識と魔法能力を持つ。かつて人間との戦争で傷ついた過去を持つが、クレシアの純真な心に触れ、彼女たちの旅をサポートすることを決意。相手を煽るような言動を取るが、常に冷静に物事を俯瞰している。",
       profile: {
         birthday: "11月3日",
         height: "148cm",
