@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import PrologueTextFade from "../../../components/function/PrologueTextFade";
 
 const scenes = [
@@ -22,9 +22,30 @@ const scenes = [
 export default function PrologueSection() {
     const [sceneIndex, setSceneIndex] = useState(0);
     const [isFading, setIsFading] = useState(false);
+    
+    // 表示状態の監視用
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.3 } // 30%見えたら表示と判定
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     // 自動ループ
     useEffect(() => {
+        if (!isVisible) return; // 画面外の場合はループを停止
+
         const timer = setTimeout(() => {
             setIsFading(true);
             setTimeout(() => {
@@ -34,10 +55,10 @@ export default function PrologueSection() {
         }, scenes[sceneIndex].duration);
 
         return () => clearTimeout(timer);
-    }, [sceneIndex]);
+    }, [sceneIndex, isVisible]);
 
     return (
-        <section className="py-12 md:py-16 px-2 md:px-6 relative z-10">
+        <section ref={sectionRef} className="py-12 md:py-16 px-2 md:px-6 relative z-10">
             <div className="max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-4 border-[#3e2723] relative aspect-[4/5] xs:aspect-[3/2] md:aspect-video flex items-center justify-center group">
                 {/* 背景画像 */}
                 <img
