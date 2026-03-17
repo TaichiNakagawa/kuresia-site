@@ -104,7 +104,7 @@ export default function HomePage() {
             <div className="mt-16 md:mt-20 w-full max-w-4xl overflow-hidden rounded-xl md:rounded-2xl border-2 md:border-4 border-[#3e2723] shadow-[0_0_50px_rgba(0,0,0,0.8)] relative">
               <div className="absolute inset-0 border-4 md:border-8 border-[#d2b48c]/10 pointer-events-none" />
               <video width="100%" height="auto" controls className="w-full">
-                <source src="/gamepv.mp4" type="video/mp4" />
+                <source src="/gamepv2.mp4" type="video/mp4" />
                 お使いのブラウザは動画タグに対応していません。
               </video>
             </div>
